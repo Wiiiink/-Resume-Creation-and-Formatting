@@ -1,40 +1,40 @@
-# Output Workflow
+# 输出流程
 
-Use this reference when creating final resume artifacts.
+创建最终简历文件时读取本文件。
 
-## Normal Output Flow
+## 标准流程
 
-1. Build or refresh `assets/template-index.json`.
-2. If `template/` still contains archives, run `scripts/extract_template_archives.py --template-root template --delete-archives` before indexing.
-3. Normalize user facts into JSON.
-4. Generate DOCX with `scripts/generate_resume_docx.py`.
-5. Export PDF with `scripts/export_pdf.py`.
-6. Validate with `scripts/validate_resume_package.py`.
-7. Return paths and the selected template source.
+1. 如果 `template/` 仍有 `.zip` 或 `.rar`，运行 `scripts/extract_template_archives.py --template-root template --delete-archives`。
+2. 运行 `scripts/build_template_index.py` 建立或刷新 `assets/template-index.json`。
+3. 将用户信息或旧简历内容整理成 JSON 事实。
+4. 用 `scripts/generate_resume_docx.py` 生成 DOCX。
+5. 用 `scripts/export_pdf.py` 导出 PDF。
+6. 用 `scripts/validate_resume_package.py` 验证输出。
+7. 返回输出路径和所选模板来源。
 
-## DOCX Rules
+## DOCX 规则
 
-- Preserve template-derived section order.
-- Use compact programmer resume spacing.
-- Use Chinese font-friendly defaults for Chinese output.
-- Include a plain text companion file when generating a package; it helps validation and review.
+- 保留模板语料中的章节顺序。
+- 使用紧凑的程序员简历间距。
+- 中文输出要使用适合中文显示的默认字体。
+- 同时生成 `resume.txt`，便于验证和人工检查。
 
-## PDF Rules
+## PDF 规则
 
-`scripts/export_pdf.py` tries:
+`scripts/export_pdf.py` 会按顺序尝试：
 
-1. LibreOffice or `soffice`.
-2. Microsoft Word COM automation on Windows.
-3. Diagnostic JSON if no converter is available.
+1. LibreOffice 或 `soffice`。
+2. Windows 上的 Microsoft Word COM 自动化。
+3. 如果都不可用，生成诊断 JSON。
 
-PDF export failure is acceptable only when the diagnostic clearly names the missing converter. Always validate and return the DOCX.
+只有诊断文件清楚说明缺少哪个转换器时，PDF 导出失败才可接受。无论 PDF 是否成功，都必须返回 DOCX。
 
-## Validation Rules
+## 验证规则
 
-Validation must confirm:
+验证必须确认：
 
-- The package directory exists.
-- `resume.docx` exists and is non-empty.
-- Required user facts appear in generated text.
-- Obvious placeholders and sample contact values are absent.
-- `resume.pdf` exists unless the command was run with `--allow-missing-pdf`.
+- 输出目录存在。
+- `resume.docx` 存在且非空。
+- 必要用户事实出现在生成文本中。
+- 没有明显占位符和模板样例联系方式。
+- 除非使用 `--allow-missing-pdf`，否则必须存在 `resume.pdf` 或 PDF 诊断文件。

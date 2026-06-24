@@ -1,35 +1,33 @@
-# Template Corpus
+# 模板语料
 
-Use this reference when selecting a resume template or deciding which examples to inspect.
+选择模板或检查样例时读取本文件。
 
-## Available Families
+## 模板族
 
-The repository contains `template/.程序员简历模板互联网IT行业程序员自动发货/`.
+仓库包含 `template/.程序员简历模板互联网IT行业程序员自动发货/`。
 
-- `127套简历/W10-程序员简历/`: broad programmer resume templates, including one-page, two-page, three-page, four-page, covers, icon material, and writing guides.
-- `前端简历/前端简历模板/前端简历/`: frontend-oriented packages. Many zip packages include PDF, Word, TXT, and HTML versions.
-- `后端简历/java简历/java简历/`: Java backend examples grouped by experience level, region, and example quality.
-- `IT行业精品模板/`: compressed premium template archive.
-- `图片目录/`: visual catalogs for choosing single-page, two-page, three-page, four-page, and cover styles.
+- `127套简历/W10-程序员简历/`：通用程序员简历模板，包含单页、二页、三页、四页、封面、图标素材和写作教程。
+- `前端简历/前端简历模板/前端简历/`：前端方向模板。很多压缩包原本包含 PDF、Word、TXT、HTML 四份。
+- `后端简历/java简历/java简历/`：Java 后端简历样例，按经验年限、城市、优秀样例等分类。
+- `IT行业精品模板/`：精品模板压缩包，解压后作为普通模板素材读取。
+- `图片目录/`：单页、双页、三页、四页和封面的视觉目录。
 
-## Selection Rules
+## 选择规则
 
-- Prefer frontend templates for Web frontend, UI/frontend interaction, JavaScript, HTML, CSS, Vue, React, or frontend support roles.
-- Prefer Java backend templates for Java, Spring, MyBatis, backend platform, API, middleware, or enterprise system roles.
-- Prefer one-page templates for interns, new graduates, and concise applications.
-- Prefer two-page templates for 2-5 years of experience with multiple projects.
-- Prefer multi-page templates when the user explicitly wants detailed project history.
-- Use visual catalogs only for style selection; do not treat catalog labels as user facts.
+- Web 前端、前端交互、JavaScript、HTML、CSS、Vue、React、前端技术支持岗位，优先选前端模板。
+- Java、Spring、MyBatis、后端平台、API、中间件、企业系统岗位，优先选 Java 后端模板。
+- 实习生、应届生、信息较少的候选人，优先选单页模板。
+- 2-5 年经验且有多个项目，优先选二页模板。
+- 用户明确要求详细项目经历时，再选多页模板。
+- 图片目录只用于选择视觉风格，不能把目录文字当作用户事实。
 
-## Template Package Note
+## 压缩包规则
 
-The included note says each compressed package generally contains four versions:
+模板说明写明：每个压缩包通常包含四份文件：
 
-1. PDF for best print effect.
-2. Word for local editing.
-3. TXT for editing information.
-4. HTML for visual viewing.
+1. PDF：打印效果最好。
+2. Word：可本地编辑。
+3. TXT：方便编辑信息。
+4. HTML：方便查看网页效果。
 
-Prefer TXT/HTML for agent inspection and Word/PDF for final formatting targets.
-
-Archives must not remain in `template/` after repository preparation. Extract `.zip` and `.rar` packages into ordinary sibling folders, then delete the compressed package after successful extraction so agents can read the actual Word/TXT/HTML/PDF files directly.
+仓库准备完成后，`template/` 里不应再保留 `.zip` 或 `.rar`。必须把压缩包解压到同级目录，并且只有在解压成功、确认产出文件后，才删除原压缩包。后续 agent 应直接读取解压后的 Word、TXT、HTML、PDF 文件。
