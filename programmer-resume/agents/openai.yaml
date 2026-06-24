@@ -1,0 +1,7 @@
+interface:
+  display_name: "Programmer Resume"
+  short_description: "Template-based programmer resumes with DOCX/PDF."
+  default_prompt: "Use $programmer-resume to create or optimize my programmer resume from my facts and the bundled templates."
+
+policy:
+  allow_implicit_invocation: true
