@@ -25,7 +25,8 @@
 
 1. LibreOffice 或 `soffice`。
 2. Windows 上的 Microsoft Word COM 自动化。
-3. 如果都不可用，生成诊断 JSON。
+3. 使用 ReportLab 从 DOCX 文本渲染 PDF。
+4. 如果都不可用，生成诊断 JSON。
 
 只有诊断文件清楚说明缺少哪个转换器时，PDF 导出失败才可接受。无论 PDF 是否成功，都必须返回 DOCX。
 

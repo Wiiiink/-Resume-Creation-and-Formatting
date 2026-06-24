@@ -133,6 +133,25 @@ class ProgrammerResumeSkillContractTests(unittest.TestCase):
             self.assertTrue(docx_path.exists())
             self.assertGreater(docx_path.stat().st_size, 5_000)
 
+            pdf_result = subprocess.run(
+                [
+                    PYTHON,
+                    str(SKILL_DIR / "scripts" / "export_pdf.py"),
+                    "--docx",
+                    str(docx_path),
+                    "--out",
+                    str(out_dir / "resume.pdf"),
+                ],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+            )
+
+            self.assertEqual(pdf_result.returncode, 0, pdf_result.stderr)
+            pdf_path = out_dir / "resume.pdf"
+            self.assertTrue(pdf_path.exists())
+            self.assertGreater(pdf_path.stat().st_size, 1_000)
+
 
 if __name__ == "__main__":
     unittest.main()

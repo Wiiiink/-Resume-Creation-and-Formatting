@@ -7,7 +7,13 @@ import argparse
 import json
 import shutil
 import subprocess
+import textwrap
 from pathlib import Path
+from xml.etree import ElementTree
+import zipfile
+
+
+WORD_NS = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 
 
 def try_libreoffice(docx: Path, out: Path) -> bool:
@@ -52,6 +58,52 @@ def try_word_com(docx: Path, out: Path) -> bool:
             word.Quit()
 
 
+def docx_to_text(docx: Path) -> str:
+    with zipfile.ZipFile(docx) as archive:
+        xml = archive.read("word/document.xml")
+    root = ElementTree.fromstring(xml)
+    lines = []
+    for paragraph in root.iter(f"{WORD_NS}p"):
+        texts = [node.text or "" for node in paragraph.iter(f"{WORD_NS}t")]
+        line = "".join(texts).strip()
+        if line:
+            lines.append(line)
+    return "\n".join(lines)
+
+
+def try_reportlab_pdf(docx: Path, out: Path) -> bool:
+    try:
+        from reportlab.lib.pagesizes import A4
+        from reportlab.pdfbase import pdfmetrics
+        from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+        from reportlab.pdfgen import canvas
+    except Exception:
+        return False
+
+    text = docx_to_text(docx)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    pdfmetrics.registerFont(UnicodeCIDFont("STSong-Light"))
+    page_width, page_height = A4
+    margin = 42
+    line_height = 15
+    y = page_height - margin
+    pdf = canvas.Canvas(str(out), pagesize=A4)
+    pdf.setTitle(docx.stem)
+    pdf.setFont("STSong-Light", 10)
+
+    for raw_line in text.splitlines():
+        wrapped = textwrap.wrap(raw_line, width=52) or [""]
+        for line in wrapped:
+            if y < margin:
+                pdf.showPage()
+                pdf.setFont("STSong-Light", 10)
+                y = page_height - margin
+            pdf.drawString(margin, y, line)
+            y -= line_height
+    pdf.save()
+    return out.exists() and out.stat().st_size > 0
+
+
 def write_diagnostic(out: Path, docx: Path) -> Path:
     diagnostic = out.parent / "pdf-export-diagnostic.json"
     diagnostic.parent.mkdir(parents=True, exist_ok=True)
@@ -74,7 +126,7 @@ def main() -> int:
     if not args.docx.exists():
         parser.error(f"DOCX does not exist: {args.docx}")
 
-    if try_libreoffice(args.docx, args.out) or try_word_com(args.docx, args.out):
+    if try_libreoffice(args.docx, args.out) or try_word_com(args.docx, args.out) or try_reportlab_pdf(args.docx, args.out):
         print(f"exported {args.out}")
         return 0
 
