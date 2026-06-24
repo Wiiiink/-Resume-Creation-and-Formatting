@@ -5,11 +5,12 @@ Use this reference when creating final resume artifacts.
 ## Normal Output Flow
 
 1. Build or refresh `assets/template-index.json`.
-2. Normalize user facts into JSON.
-3. Generate DOCX with `scripts/generate_resume_docx.py`.
-4. Export PDF with `scripts/export_pdf.py`.
-5. Validate with `scripts/validate_resume_package.py`.
-6. Return paths and the selected template source.
+2. If `template/` still contains archives, run `scripts/extract_template_archives.py --template-root template --delete-archives` before indexing.
+3. Normalize user facts into JSON.
+4. Generate DOCX with `scripts/generate_resume_docx.py`.
+5. Export PDF with `scripts/export_pdf.py`.
+6. Validate with `scripts/validate_resume_package.py`.
+7. Return paths and the selected template source.
 
 ## DOCX Rules
 

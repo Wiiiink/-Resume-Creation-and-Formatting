@@ -31,3 +31,5 @@ The included note says each compressed package generally contains four versions:
 4. HTML for visual viewing.
 
 Prefer TXT/HTML for agent inspection and Word/PDF for final formatting targets.
+
+Archives must not remain in `template/` after repository preparation. Extract `.zip` and `.rar` packages into ordinary sibling folders, then delete the compressed package after successful extraction so agents can read the actual Word/TXT/HTML/PDF files directly.

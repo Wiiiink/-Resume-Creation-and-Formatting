@@ -12,22 +12,24 @@ Use `template/` as the source for resume structure, style, section rhythm, and e
 ## Workflow
 
 1. Identify the input mode: structured facts, an existing resume, or both.
-2. Run `scripts/build_template_index.py` if `assets/template-index.json` is missing or stale.
-3. Select a template profile from the index by target role, experience level, language, and desired length.
-4. Read the relevant reference:
+2. If `template/` contains `.zip` or `.rar` files, run `scripts/extract_template_archives.py --template-root template --delete-archives` before indexing.
+3. Run `scripts/build_template_index.py` if `assets/template-index.json` is missing or stale.
+4. Select a template profile from the index by target role, experience level, language, and desired length.
+5. Read the relevant reference:
    - `references/template-corpus.md` for template families and selection.
    - `references/resume-writing-rules.md` for content rules and anti-hallucination rules.
    - `references/output-workflow.md` for DOCX/PDF generation and validation.
-5. Draft or optimize content using template-derived section order and bullet style.
-6. Generate DOCX with `scripts/generate_resume_docx.py`.
-7. Export PDF with `scripts/export_pdf.py`.
-8. Validate outputs with `scripts/validate_resume_package.py` before replying.
+6. Draft or optimize content using template-derived section order and bullet style.
+7. Generate DOCX with `scripts/generate_resume_docx.py`.
+8. Export PDF with `scripts/export_pdf.py`.
+9. Validate outputs with `scripts/validate_resume_package.py` before replying.
 
 ## Commands
 
 Build or refresh the template index:
 
 ```bash
+python programmer-resume/scripts/extract_template_archives.py --template-root template --delete-archives
 python programmer-resume/scripts/build_template_index.py --template-root template --out programmer-resume/assets/template-index.json
 ```
 

@@ -19,6 +19,7 @@ class ProgrammerResumeSkillContractTests(unittest.TestCase):
             SKILL_DIR / "references" / "template-corpus.md",
             SKILL_DIR / "references" / "resume-writing-rules.md",
             SKILL_DIR / "references" / "output-workflow.md",
+            SKILL_DIR / "scripts" / "extract_template_archives.py",
             SKILL_DIR / "scripts" / "build_template_index.py",
             SKILL_DIR / "scripts" / "extract_resume_text.py",
             SKILL_DIR / "scripts" / "generate_resume_docx.py",
@@ -40,6 +41,9 @@ class ProgrammerResumeSkillContractTests(unittest.TestCase):
         self.assertIn("DOCX", skill_text.upper())
         self.assertIn("PDF", skill_text.upper())
         self.assertIn("template", skill_text.lower())
+        self.assertIn("程序员简历", skill_text)
+        self.assertIn("模板", skill_text)
+        self.assertIn("不得编造", skill_text)
         self.assertNotIn("TODO", skill_text.upper())
 
     def test_template_index_script_builds_expected_summary(self):
@@ -61,12 +65,22 @@ class ProgrammerResumeSkillContractTests(unittest.TestCase):
 
             self.assertEqual(result.returncode, 0, result.stderr)
             data = json.loads(out_path.read_text(encoding="utf-8"))
-            self.assertGreaterEqual(data["summary"]["total_files"], 300)
+            self.assertGreaterEqual(data["summary"]["total_files"], 400)
             self.assertGreaterEqual(data["summary"]["extensions"][".docx"], 160)
             self.assertGreaterEqual(data["summary"]["extensions"][".doc"], 80)
-            self.assertGreaterEqual(data["summary"]["extensions"][".zip"], 30)
+            self.assertEqual(data["summary"]["extensions"].get(".zip", 0), 0)
+            self.assertEqual(data["summary"]["extensions"].get(".rar", 0), 0)
             self.assertTrue(any(item["role"] == "frontend" for item in data["files"]))
             self.assertTrue(any(item["role"] == "java-backend" for item in data["files"]))
+
+    def test_template_archives_have_been_extracted_and_removed(self):
+        archives = sorted(
+            path.relative_to(ROOT).as_posix()
+            for path in (ROOT / "template").rglob("*")
+            if path.is_file() and path.suffix.lower() in {".zip", ".rar"}
+        )
+
+        self.assertEqual(archives, [])
 
     def test_validate_package_rejects_placeholders(self):
         with tempfile.TemporaryDirectory() as temp_dir:

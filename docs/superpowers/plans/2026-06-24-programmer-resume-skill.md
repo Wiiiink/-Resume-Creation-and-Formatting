@@ -20,6 +20,7 @@
 - Create `programmer-resume/references/resume-writing-rules.md`: content and anti-hallucination rules derived from templates.
 - Create `programmer-resume/references/output-workflow.md`: DOCX/PDF output workflow and fallback behavior.
 - Create `programmer-resume/scripts/build_template_index.py`: scan template corpus and emit JSON index.
+- Create `programmer-resume/scripts/extract_template_archives.py`: safely extract `.zip`/`.rar` template packages into sibling folders and delete archives only after successful extraction.
 - Create `programmer-resume/scripts/extract_resume_text.py`: extract inspectable text from template samples and old resumes.
 - Create `programmer-resume/scripts/generate_resume_docx.py`: generate a DOCX from structured facts and a selected template profile.
 - Create `programmer-resume/scripts/export_pdf.py`: convert DOCX to PDF or provide a clear diagnostic.
@@ -63,7 +64,61 @@ git push
 
 ---
 
-### Task 2: Template Indexing And Extraction
+### Task 2: Template Archive Extraction
+
+**Files:**
+- Create: `programmer-resume/scripts/extract_template_archives.py`
+- Modify: `programmer-resume/references/template-corpus.md`
+- Modify: `programmer-resume/references/output-workflow.md`
+
+- [ ] **Step 1: Write the failing archive contract**
+
+Update tests so the template corpus cannot contain `.zip` or `.rar` files, and `template-index.json` must not include archive extensions.
+
+- [ ] **Step 2: Run tests to verify RED**
+
+Run:
+
+```powershell
+& 'C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' -m unittest discover -s tests -p 'test_*.py'
+```
+
+Expected: FAIL while compressed template packages still exist.
+
+- [ ] **Step 3: Implement `extract_template_archives.py`**
+
+Implement safe extraction:
+
+- Resolve every archive under `template/`.
+- Extract each archive into a sibling folder named after the archive stem.
+- Prevent path traversal by ensuring every output path remains inside the destination folder.
+- Use Python `zipfile` for `.zip`.
+- Use local `7z` for `.rar` if available.
+- Delete an archive only after extraction succeeds and at least one output file exists.
+
+- [ ] **Step 4: Extract archives and remove originals**
+
+Run:
+
+```powershell
+& 'C:\Users\admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' programmer-resume/scripts/extract_template_archives.py --template-root template --delete-archives
+```
+
+Expected: `.zip` and extractable `.rar` files are gone, and their contents exist as ordinary files.
+
+- [ ] **Step 5: Commit and push**
+
+Run:
+
+```powershell
+git add programmer-resume template tests docs
+git commit -m "feat: extract template archives"
+git push
+```
+
+---
+
+### Task 3: Template Indexing And Extraction
 
 **Files:**
 - Create: `programmer-resume/scripts/build_template_index.py`
@@ -105,7 +160,7 @@ git push
 
 ---
 
-### Task 3: Skill Documentation And Metadata
+### Task 4: Skill Documentation And Metadata
 
 **Files:**
 - Create: `programmer-resume/SKILL.md`
@@ -161,7 +216,7 @@ git push
 
 ---
 
-### Task 4: DOCX Generation And Package Validation
+### Task 5: DOCX Generation And Package Validation
 
 **Files:**
 - Create: `programmer-resume/scripts/generate_resume_docx.py`
@@ -212,7 +267,7 @@ git push
 
 ---
 
-### Task 5: PDF Export And Final Verification
+### Task 6: PDF Export And Final Verification
 
 **Files:**
 - Create: `programmer-resume/scripts/export_pdf.py`
@@ -255,7 +310,7 @@ git push
 
 ---
 
-### Task 6: Completion Audit
+### Task 7: Completion Audit
 
 **Files:**
 - Inspect all files above.
@@ -281,4 +336,3 @@ git add .
 git commit -m "docs: complete programmer resume skill audit"
 git push
 ```
-
