@@ -1,0 +1,54 @@
+{
+  "target_role": "Java 后端开发工程师",
+  "language": "zh-CN",
+  "personal": {
+    "name": "林晨",
+    "phone": "18800001111",
+    "email": "linchen@example.com",
+    "city": "杭州",
+    "github": "https://github.com/example-linchen"
+  },
+  "summary": "3 年 Java 后端开发经验，主要负责企业级业务系统、数据平台接口和内部工具建设。",
+  "skills": {
+    "languages": ["Java", "SQL", "JavaScript"],
+    "backend": ["Spring Boot", "Spring MVC", "MyBatis", "Spring Security"],
+    "databases": ["MySQL", "Redis"],
+    "tools": ["Git", "Maven", "Docker", "Linux"]
+  },
+  "work_experience": [
+    {
+      "company": "杭州云启科技有限公司",
+      "role": "Java 后端开发工程师",
+      "start": "2022.07",
+      "end": "至今",
+      "bullets": [
+        "负责订单、账户、权限等核心模块的接口设计与开发。",
+        "参与慢 SQL 排查和缓存改造，将高频查询平均响应时间从 420ms 降至 160ms。",
+        "编写接口文档和单元测试，配合前端完成联调和灰度发布。"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "企业费用审批平台",
+      "role": "后端核心开发",
+      "period": "2023.03-2023.11",
+      "technologies": ["Spring Boot", "MyBatis", "MySQL", "Redis"],
+      "bullets": [
+        "设计审批流节点、角色权限和费用单据状态流转模型。",
+        "实现审批记录查询、导出和异常重试机制，降低人工排查成本。",
+        "通过索引优化和缓存预热提升列表页加载速度。"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "浙江工业大学",
+      "degree": "本科",
+      "major": "软件工程",
+      "start": "2018.09",
+      "end": "2022.06"
+    }
+  ],
+  "certificates": ["CET-6", "软件设计师"]
+}
