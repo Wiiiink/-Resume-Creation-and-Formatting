@@ -4,8 +4,8 @@
 
 ## 标准流程
 
-1. 如果 `template/` 仍有 `.zip` 或 `.rar`，运行 `scripts/extract_template_archives.py --template-root template --delete-archives`。
-2. 运行 `scripts/build_template_index.py` 建立或刷新 `assets/template-index.json`。
+1. 确认 `template/` 只保留 `优秀简历汇总/xxx.doc`。
+2. 运行 `scripts/build_template_index.py` 建立或刷新单模板 `assets/template-index.json`。
 3. 如果用户提供本地项目目录，运行 `scripts/collect_project_facts.py --root <project-dir> --out <output>/project-facts.json`。
 4. 将用户信息、旧简历内容和项目事实整理成 JSON 事实；缺少的联系方式、学校、日期、指标必须留空或省略。
 5. 用 `scripts/generate_resume_docx.py` 生成 DOCX。
@@ -15,8 +15,8 @@
 
 ## DOCX 规则
 
-- 保留模板语料中的章节顺序。
-- 使用紧凑的程序员简历间距。
+- 保留 `xxx.doc` 的蓝金色视觉系统、章节顺序和紧凑间距。
+- `scripts/generate_resume_docx.py` 必须同时生成 `resume-render.json`，供 PDF 使用同一套样式渲染。
 - 中文输出要使用适合中文显示的默认字体。
 - 同时生成 `resume.txt`，便于验证和人工检查。
 
@@ -24,10 +24,11 @@
 
 `scripts/export_pdf.py` 会按顺序尝试：
 
-1. LibreOffice 或 `soffice`。
-2. Windows 上的 Microsoft Word COM 自动化。
-3. 使用 ReportLab 从 DOCX 文本渲染 PDF。
-4. 如果都不可用，生成诊断 JSON。
+1. 如果同目录有 `resume-render.json`，使用 ReportLab 按 canonical 蓝金样式直接渲染 PDF。
+2. LibreOffice 或 `soffice`。
+3. Windows 上的 Microsoft Word COM 自动化。
+4. 使用 ReportLab 从 DOCX 文本渲染 PDF。
+5. 如果都不可用，生成诊断 JSON。
 
 只有诊断文件清楚说明缺少哪个转换器时，PDF 导出失败才可接受。无论 PDF 是否成功，都必须返回 DOCX。
 

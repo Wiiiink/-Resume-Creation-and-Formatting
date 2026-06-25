@@ -1,0 +1,145 @@
+{
+  "title": "全栈开发工程师_郑发炜",
+  "personal": {
+    "name": "郑发炜"
+  },
+  "summary": "软件工程专业背景，熟悉 Java Spring Boot 后端与 Vue/React 前端开发；项目覆盖低代码 SaaS、ERP、养老服务、知识库与小程序等场景，能够独立完成前后端分离接口设计、业务页面开发、权限认证、文件存储和部署联调。",
+  "basics": [
+    [
+      "姓名",
+      "郑发炜"
+    ],
+    [
+      "专业背景",
+      "软件工程"
+    ]
+  ],
+  "intent": [
+    [
+      "目标职位",
+      "全栈开发工程师"
+    ]
+  ],
+  "skills": [
+    {
+      "label": "编程语言",
+      "value": "Java、JavaScript、TypeScript、SQL"
+    },
+    {
+      "label": "后端框架",
+      "value": "Spring Boot、Spring Security、Spring Cloud、MyBatis、MyBatis-Plus、Spring Data JPA"
+    },
+    {
+      "label": "前端技术",
+      "value": "Vue 3、Vite、Element Plus、Pinia、Vue Router、React、Next.js、Tailwind CSS、微信小程序"
+    },
+    {
+      "label": "数据库",
+      "value": "MySQL、Redis、PostgreSQL"
+    },
+    {
+      "label": "工具平台",
+      "value": "Maven、Docker Compose、Nginx、Git、Knife4j、Axios"
+    }
+  ],
+  "work_experience": [],
+  "projects": [
+    {
+      "name": "dmmx-SAAS 低代码 SaaS 平台",
+      "role": "全栈开发",
+      "technologies": [
+        "Spring Boot",
+        "MyBatis-Plus",
+        "MySQL",
+        "Redis",
+        "Vue 3",
+        "TypeScript",
+        "Element Plus",
+        "Pinia",
+        "Docker Compose"
+      ],
+      "bullets": [
+        "参与低代码 SaaS 平台全栈实现，后端按 system、lowcode、dashboard、business、behavior、survey、file、formula 等模块拆分，前端基于 Vue 3 与 Element Plus 构建管理端。",
+        "实现低代码页面搭建、动态表格运行时、流程设计、租户与角色菜单权限、文件资产、问卷和业务订单等模块，并维护 api/system、api/lowcode、api/files 等前端接口联调。",
+        "整理 Docker Compose 部署链路，使用 Nginx 托管前端静态资源并反向代理 /api，组合 Spring Boot、MySQL 8.4 与 Redis 7.2。"
+      ]
+    },
+    {
+      "name": "ERP 企业资源管理系统",
+      "role": "全栈开发",
+      "technologies": [
+        "Spring Boot",
+        "MyBatis-Plus",
+        "MySQL",
+        "Redis",
+        "Vue 3",
+        "Vite",
+        "Element Plus",
+        "Pinia",
+        "Knife4j"
+      ],
+      "bullets": [
+        "参与 ERP 系统开发，后端按 admin、product、order、customer、aftersale、stats、chat、security、system 等 Maven 模块组织，前端构建业务管理界面。",
+        "维护仓储、采购、库存、商品、订单、客户、发票、售后、看板、权限和聊天等页面与 API 对接，使用 Axios、Vue Router、Pinia 管理请求、路由和状态。",
+        "项目依赖覆盖 Knife4j、EasyExcel、WangEditor、xlsx 等能力，用于接口文档、数据导入导出和富文本编辑等场景。"
+      ]
+    },
+    {
+      "name": "养老服务与地区政策管理平台",
+      "role": "全栈开发",
+      "technologies": [
+        "Spring Boot",
+        "Spring Data JPA",
+        "MySQL",
+        "Vue 3",
+        "Element Plus",
+        "React",
+        "Next.js",
+        "Tailwind CSS",
+        "微信小程序"
+      ],
+      "bullets": [
+        "参与养老服务配置平台开发，后端包含 Region、RegionPolicy、PaymentLevel、InterestRate、AgeSubsidy、AppSetting 等领域对象，支撑地区政策、缴费档次和补贴配置。",
+        "维护 Vue 管理端的地区列表、地区详情、登录和应用设置页面，并与 Spring Boot 接口联调；项目同时包含微信小程序和 Next.js 前端目录。"
+      ]
+    },
+    {
+      "name": "ai-guoxue 国学知识库应用",
+      "role": "全栈开发",
+      "technologies": [
+        "Spring Boot",
+        "Spring Security",
+        "JWT",
+        "PostgreSQL",
+        "Vue 3",
+        "Vite",
+        "微信小程序"
+      ],
+      "bullets": [
+        "参与国学知识库与课程类应用开发，后端使用 Spring Boot、PostgreSQL、Spring Security/JWT，管理端使用 Vue 3 与 Vite，项目包含微信小程序前端。",
+        "整理八星案例知识库文档，知识库索引包含 Markdown、catalog、chapter-index、topic-index、manifest 等文件，并维护课程、内容、用户、支付、分销和阅读器相关前端模块。"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "major": "软件工程"
+    }
+  ],
+  "certificates": [],
+  "selected_template": {
+    "path": ".程序员简历模板互联网IT行业程序员自动发货/后端简历/java简历/java简历/优秀简历汇总/xxx.doc",
+    "extension": ".doc",
+    "size": 202150,
+    "role": "java-backend",
+    "page_family": "unknown",
+    "package_group": "优秀简历汇总"
+  },
+  "style": {
+    "source": "canonical xxx.doc template",
+    "blue": "0070C0",
+    "gold": "C8A96A",
+    "template_name": "xxx.doc",
+    "template_hint": "优秀简历汇总"
+  }
+}

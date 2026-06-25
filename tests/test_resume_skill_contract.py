@@ -3,12 +3,15 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import zipfile
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_DIR = ROOT / "programmer-resume"
 PYTHON = sys.executable
+CANONICAL_TEMPLATE_NAME = "xxx.doc"
+CANONICAL_TEMPLATE_HINT = "优秀简历汇总"
 
 
 class ProgrammerResumeSkillContractTests(unittest.TestCase):
@@ -118,13 +121,21 @@ class ProgrammerResumeSkillContractTests(unittest.TestCase):
 
             self.assertEqual(result.returncode, 0, result.stderr)
             data = json.loads(out_path.read_text(encoding="utf-8"))
-            self.assertGreaterEqual(data["summary"]["total_files"], 400)
-            self.assertGreaterEqual(data["summary"]["extensions"][".docx"], 160)
-            self.assertGreaterEqual(data["summary"]["extensions"][".doc"], 80)
+            self.assertEqual(data["summary"]["total_files"], 1)
+            self.assertEqual(data["summary"]["extensions"][".doc"], 1)
+            self.assertEqual(data["summary"]["extensions"].get(".docx", 0), 0)
             self.assertEqual(data["summary"]["extensions"].get(".zip", 0), 0)
             self.assertEqual(data["summary"]["extensions"].get(".rar", 0), 0)
-            self.assertTrue(any(item["role"] == "frontend" for item in data["files"]))
-            self.assertTrue(any(item["role"] == "java-backend" for item in data["files"]))
+            self.assertEqual(data["files"][0]["path"].replace("\\", "/").split("/")[-1], CANONICAL_TEMPLATE_NAME)
+            self.assertIn(CANONICAL_TEMPLATE_HINT, data["files"][0]["path"])
+
+    def test_template_directory_contains_only_canonical_template(self):
+        files = sorted(path for path in (ROOT / "template").rglob("*") if path.is_file())
+        relative_files = [path.relative_to(ROOT).as_posix() for path in files]
+
+        self.assertEqual(len(relative_files), 1, relative_files[:10])
+        self.assertEqual(files[0].name, CANONICAL_TEMPLATE_NAME)
+        self.assertIn(CANONICAL_TEMPLATE_HINT, relative_files[0])
 
     def test_template_archives_have_been_extracted_and_removed(self):
         archives = sorted(
@@ -160,6 +171,42 @@ class ProgrammerResumeSkillContractTests(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("placeholder", (result.stdout + result.stderr).lower())
 
+    def test_validate_package_allows_field_labels(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            facts_path = Path(temp_dir) / "facts.json"
+            facts_path.write_text(
+                json.dumps(
+                    {
+                        "target_role": "全栈开发工程师",
+                        "personal": {"name": "郑发炜"},
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            package_dir = Path(temp_dir) / "package"
+            package_dir.mkdir()
+            (package_dir / "resume.txt").write_text(
+                "姓名：郑发炜\n求职意向：全栈开发工程师\n专业背景：软件工程\n",
+                encoding="utf-8",
+            )
+            result = subprocess.run(
+                [
+                    PYTHON,
+                    str(SKILL_DIR / "scripts" / "validate_resume_package.py"),
+                    "--facts",
+                    str(facts_path),
+                    "--package-dir",
+                    str(package_dir),
+                    "--allow-missing-pdf",
+                ],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
     def test_generate_resume_docx_from_sample_facts(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             out_dir = Path(temp_dir) / "resume-package"
@@ -185,6 +232,15 @@ class ProgrammerResumeSkillContractTests(unittest.TestCase):
             docx_path = out_dir / "resume.docx"
             self.assertTrue(docx_path.exists())
             self.assertGreater(docx_path.stat().st_size, 5_000)
+            metadata = json.loads((out_dir / "metadata.json").read_text(encoding="utf-8"))
+            self.assertTrue(metadata["selected_template"]["path"].endswith(CANONICAL_TEMPLATE_NAME))
+            self.assertIn(CANONICAL_TEMPLATE_HINT, metadata["selected_template"]["path"])
+            self.assertEqual(metadata["style_source"], "canonical xxx.doc template")
+            self.assertTrue((out_dir / "resume-render.json").exists())
+            with zipfile.ZipFile(docx_path) as archive:
+                document_xml = archive.read("word/document.xml")
+            self.assertIn(b"0070C0", document_xml)
+            self.assertIn(b"C8A96A", document_xml)
 
             pdf_result = subprocess.run(
                 [

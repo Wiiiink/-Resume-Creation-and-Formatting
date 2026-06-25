@@ -4,7 +4,7 @@
   "personal": {
     "name": "郑发炜"
   },
-  "summary": "软件工程专业背景，面向 Java Spring Boot 与 Vue/React 全栈开发；本地项目覆盖 SaaS 低代码平台、ERP 管理系统、养老服务平台、国学知识库应用和 Spring Cloud 服务调用示例，熟悉前后端分离、模块化后端服务、权限认证、文件存储、业务管理后台和容器化部署链路。",
+  "summary": "软件工程专业背景，熟悉 Java Spring Boot 后端与 Vue/React 前端开发；项目覆盖低代码 SaaS、ERP、养老服务、知识库与小程序等场景，能够独立完成前后端分离接口设计、业务页面开发、权限认证、文件存储和部署联调。",
   "skills": {
     "languages": [
       "Java",
@@ -16,7 +16,6 @@
       "Spring Boot",
       "Spring Security",
       "Spring Cloud",
-      "Spring Cloud Alibaba",
       "MyBatis",
       "MyBatis-Plus",
       "Spring Data JPA"
@@ -29,7 +28,6 @@
       "Vue Router",
       "React",
       "Next.js",
-      "shadcn/ui",
       "Tailwind CSS",
       "微信小程序"
     ],
@@ -53,30 +51,26 @@
       "name": "dmmx-SAAS 低代码 SaaS 平台",
       "role": "全栈开发",
       "technologies": [
-        "Java",
         "Spring Boot",
         "MyBatis-Plus",
         "MySQL",
         "Redis",
         "Vue 3",
         "TypeScript",
-        "Vite",
         "Element Plus",
         "Pinia",
-        "Docker Compose",
-        "Nginx"
+        "Docker Compose"
       ],
       "bullets": [
-        "参与低代码 SaaS 平台全栈实现，后端按 system、lowcode、dashboard、business、behavior、survey、file、formula 等模块拆分，前端基于 Vue 3、Vite、Element Plus、Pinia 组织管理端页面。",
-        "实现并维护低代码页面搭建、动态表格运行时、流程设计、租户与角色菜单权限、文件资产、问卷和业务订单等模块，按 api/system、api/lowcode、api/files、api/survey、api/business 等前端接口目录进行联调。",
-        "整理 Docker Compose 一键部署链路，使用 Nginx 托管前端静态资源并反向代理 `/api`，组合 Spring Boot 后端、MySQL 8.4、Redis 7.2 容器，并保留数据库初始化 SQL 与镜像导出脚本。"
+        "参与低代码 SaaS 平台全栈实现，后端按 system、lowcode、dashboard、business、behavior、survey、file、formula 等模块拆分，前端基于 Vue 3 与 Element Plus 构建管理端。",
+        "实现低代码页面搭建、动态表格运行时、流程设计、租户与角色菜单权限、文件资产、问卷和业务订单等模块，并维护 api/system、api/lowcode、api/files 等前端接口联调。",
+        "整理 Docker Compose 部署链路，使用 Nginx 托管前端静态资源并反向代理 /api，组合 Spring Boot、MySQL 8.4 与 Redis 7.2。"
       ]
     },
     {
       "name": "ERP 企业资源管理系统",
       "role": "全栈开发",
       "technologies": [
-        "Java",
         "Spring Boot",
         "MyBatis-Plus",
         "MySQL",
@@ -88,16 +82,15 @@
         "Knife4j"
       ],
       "bullets": [
-        "参与 ERP 系统全栈开发，后端按 admin、product、order、customer、aftersale、stats、chat、security、system 等 Maven 模块组织，前端以 Vue 3、Vite、Element Plus 构建业务管理界面。",
+        "参与 ERP 系统开发，后端按 admin、product、order、customer、aftersale、stats、chat、security、system 等 Maven 模块组织，前端构建业务管理界面。",
         "维护仓储、采购、库存、商品、订单、客户、发票、售后、看板、权限和聊天等页面与 API 对接，使用 Axios、Vue Router、Pinia 管理请求、路由和状态。",
-        "项目依赖覆盖 Knife4j、MyBatis-Plus、Redis、EasyExcel、WangEditor、xlsx 等能力，用于接口文档、数据访问、缓存、导入导出和富文本编辑等场景。"
+        "项目依赖覆盖 Knife4j、EasyExcel、WangEditor、xlsx 等能力，用于接口文档、数据导入导出和富文本编辑等场景。"
       ]
     },
     {
       "name": "养老服务与地区政策管理平台",
       "role": "全栈开发",
       "technologies": [
-        "Java",
         "Spring Boot",
         "Spring Data JPA",
         "MySQL",
@@ -109,16 +102,14 @@
         "微信小程序"
       ],
       "bullets": [
-        "参与养老服务配置平台开发，后端包含 Region、RegionPolicy、PaymentLevel、InterestRate、AgeSubsidy、AppSetting 等实体、Repository 和 Controller，支撑地区政策、缴费档次、利率与高龄补贴等管理能力。",
-        "维护 Vue 管理端的地区列表、地区详情、登录和应用设置页面，并与 Spring Boot 接口进行前后端联调；项目同时包含微信小程序前端目录。",
-        "项目中包含 Next.js App Router、shadcn/ui、Tailwind CSS、TypeScript 等前端目录，用于构建另一套全栈页面与组件体系。"
+        "参与养老服务配置平台开发，后端包含 Region、RegionPolicy、PaymentLevel、InterestRate、AgeSubsidy、AppSetting 等领域对象，支撑地区政策、缴费档次和补贴配置。",
+        "维护 Vue 管理端的地区列表、地区详情、登录和应用设置页面，并与 Spring Boot 接口联调；项目同时包含微信小程序和 Next.js 前端目录。"
       ]
     },
     {
       "name": "ai-guoxue 国学知识库应用",
       "role": "全栈开发",
       "technologies": [
-        "Java",
         "Spring Boot",
         "Spring Security",
         "JWT",
@@ -128,26 +119,8 @@
         "微信小程序"
       ],
       "bullets": [
-        "参与国学知识库与课程类应用开发，后端使用 Spring Boot、PostgreSQL、Spring Security/JWT，管理端使用 Vue 3、Vite，项目包含微信小程序前端目录。",
-        "整理八星案例知识库文档，知识库索引包含 87 个 Markdown 文件以及 catalog、catalog.jsonl、chapter-index、topic-index、manifest 等索引文件。",
-        "维护课程、内容、用户、支付、分销、阅读器和资料上传相关前端工具模块，项目目录包含 direct-oss-upload、chunked-upload、wechat-payment、distribution-api、course-payment 等实现线索。"
-      ]
-    },
-    {
-      "name": "Spring Cloud 服务调用 Demo",
-      "role": "后端开发",
-      "technologies": [
-        "Java",
-        "Spring Boot",
-        "Spring Cloud",
-        "Spring Cloud Alibaba",
-        "Nacos",
-        "OpenFeign",
-        "Maven"
-      ],
-      "bullets": [
-        "搭建 Spring Cloud 服务调用示例，项目按 model、service-order、service-product 等模块拆分，使用 Spring Cloud Alibaba Nacos Discovery、OpenFeign 与 LoadBalancer 进行服务发现和调用。",
-        "通过 Maven 多模块结构组织公共模型与订单、商品服务，便于演示微服务之间的接口调用和依赖管理。"
+        "参与国学知识库与课程类应用开发，后端使用 Spring Boot、PostgreSQL、Spring Security/JWT，管理端使用 Vue 3 与 Vite，项目包含微信小程序前端。",
+        "整理八星案例知识库文档，知识库索引包含 Markdown、catalog、chapter-index、topic-index、manifest 等文件，并维护课程、内容、用户、支付、分销和阅读器相关前端模块。"
       ]
     }
   ],

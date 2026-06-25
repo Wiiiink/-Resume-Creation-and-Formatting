@@ -1,7 +1,7 @@
 interface:
   display_name: "程序员简历"
-  short_description: "基于模板生成程序员简历并导出 DOCX/PDF。"
-  default_prompt: "使用 $programmer-resume 根据我的信息和内置模板创建或优化程序员简历。"
+  short_description: "按固定蓝金 JavaEE 模板生成程序员简历并导出 DOCX/PDF。"
+  default_prompt: "使用 $programmer-resume 根据我的信息和内置 xxx.doc 蓝金模板创建或优化程序员简历。"
 
 policy:
   allow_implicit_invocation: true

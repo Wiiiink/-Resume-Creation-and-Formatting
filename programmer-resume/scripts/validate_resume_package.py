@@ -14,11 +14,13 @@ from xml.etree import ElementTree
 WORD_NS = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 PLACEHOLDER_PATTERNS = [
     r"\bXX\b",
+    r"XXXXX?",
     r"TBD",
-    r"姓名",
-    r"学校",
-    r"手机号",
+    r"毛向军",
+    r"南华大学",
     r"138-0138-0000",
+    r"13718812xxx",
+    r"Xxx@163\.com",
     r"service@qiaobutang\.com",
 ]
 

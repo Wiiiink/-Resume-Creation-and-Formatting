@@ -1,19 +1,24 @@
 {
   "selected_template": {
-    "path": ".程序员简历模板互联网IT行业程序员自动发货/127套简历/W10-程序员简历/二页-10款/10.docx",
-    "extension": ".docx",
-    "size": 331491,
-    "role": "general-programmer",
-    "page_family": "two-page",
-    "package_group": "二页-10款"
+    "path": ".程序员简历模板互联网IT行业程序员自动发货/后端简历/java简历/java简历/优秀简历汇总/xxx.doc",
+    "extension": ".doc",
+    "size": 202150,
+    "role": "java-backend",
+    "page_family": "unknown",
+    "package_group": "优秀简历汇总"
   },
   "section_order": [
-    "个人优势",
-    "专业技能",
+    "基本信息",
+    "求职意向",
+    "开发技能",
     "工作经历",
     "项目经历",
     "教育背景",
-    "证书与奖项"
+    "自我评价"
   ],
-  "style_source": "template corpus"
+  "style_source": "canonical xxx.doc template",
+  "style_tokens": {
+    "blue": "0070C0",
+    "gold": "C8A96A"
+  }
 }
