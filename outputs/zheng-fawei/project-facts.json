@@ -1,0 +1,466 @@
+{
+  "source_roots": [
+    "D:\\Projects"
+  ],
+  "projects": [
+    {
+      "name": "ai-guoxue",
+      "path": "D:\\Projects\\ai-guoxue",
+      "technologies": [
+        "JWT",
+        "Java",
+        "Maven",
+        "Node.js",
+        "PostgreSQL",
+        "Spring Boot",
+        "Vite",
+        "Vue"
+      ],
+      "modules": [
+        ".",
+        "admin-front"
+      ],
+      "evidence": [
+        "admin-front",
+        "This template should help get you started developing with Vue 3 in Vite.",
+        "Recommended IDE Setup",
+        "[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).",
+        "Baxing Case Knowledge Base Index",
+        "- Source documents: `1`",
+        "- Markdown files: `87`",
+        "- Extra indexes: `catalog.json` / `catalog.jsonl` / `chapter-index.json` / `topic-index.json` / `manifest.json`",
+        "Knowledge Base Index",
+        "- Source file: `八星数字磁场分析知识库.docx`"
+      ],
+      "dependency_signals": [
+        "@vitejs/plugin-vue",
+        "HikariCP",
+        "ai-guoxue",
+        "caffeine",
+        "pdfjs-dist",
+        "postgresql",
+        "spring-boot-starter-actuator",
+        "spring-boot-starter-cache",
+        "spring-boot-starter-parent",
+        "spring-boot-starter-security",
+        "spring-boot-starter-validation",
+        "spring-boot-starter-web",
+        "spring-jdbc",
+        "vite",
+        "vue"
+      ],
+      "files": {
+        "pom": [
+          "pom.xml"
+        ],
+        "package_json": [
+          "admin-front/package.json"
+        ],
+        "readme": [
+          "admin-front/README.md",
+          "doc/baxing-case-knowledge-base-final/README.md",
+          "doc/knowledge-base-final/README.md",
+          "doc/mingli-knowledge-base-final-v3/README.md",
+          "doc/qimen-knowledge-base-final/README.md"
+        ]
+      }
+    },
+    {
+      "name": "cloud-demo",
+      "path": "D:\\Projects\\cloud-demo",
+      "technologies": [
+        "Java",
+        "Lombok",
+        "Maven",
+        "Nacos",
+        "Spring Boot",
+        "Spring Cloud"
+      ],
+      "modules": [
+        ".",
+        "model",
+        "services",
+        "services/service-order",
+        "services/service-product"
+      ],
+      "evidence": [],
+      "dependency_signals": [
+        "cloud-demo",
+        "lombok",
+        "model",
+        "service-order",
+        "service-product",
+        "services",
+        "spring-boot-maven-plugin",
+        "spring-boot-starter-parent",
+        "spring-boot-starter-web",
+        "spring-cloud-alibaba-dependencies",
+        "spring-cloud-dependencies",
+        "spring-cloud-starter-alibaba-nacos-discovery",
+        "spring-cloud-starter-loadbalancer",
+        "spring-cloud-starter-openfeign"
+      ],
+      "files": {
+        "pom": [
+          "pom.xml",
+          "model/pom.xml",
+          "services/pom.xml",
+          "services/service-order/pom.xml",
+          "services/service-product/pom.xml"
+        ],
+        "package_json": [],
+        "readme": []
+      }
+    },
+    {
+      "name": "couple",
+      "path": "D:\\Projects\\couple",
+      "technologies": [
+        "Java",
+        "Maven",
+        "MyBatis",
+        "MySQL",
+        "Node.js",
+        "Spring Boot",
+        "Vite",
+        "Vue"
+      ],
+      "modules": [
+        "admin-front",
+        "couple-backend"
+      ],
+      "evidence": [
+        "admin-front",
+        "This template should help get you started developing with Vue 3 in Vite.",
+        "Recommended IDE Setup",
+        "[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)."
+      ],
+      "dependency_signals": [
+        "@vitejs/plugin-vue",
+        "couple-backend",
+        "mybatis-spring-boot-starter",
+        "mysql-connector-j",
+        "spring-boot-maven-plugin",
+        "spring-boot-starter-jdbc",
+        "spring-boot-starter-parent",
+        "spring-boot-starter-webmvc",
+        "spring-boot-starter-webmvc-test",
+        "vite",
+        "vue"
+      ],
+      "files": {
+        "pom": [
+          "couple-backend/pom.xml"
+        ],
+        "package_json": [
+          "admin-front/package.json"
+        ],
+        "readme": [
+          "admin-front/README.md"
+        ]
+      }
+    },
+    {
+      "name": "dmmx-SAAS",
+      "path": "D:\\Projects\\dmmx-SAAS",
+      "technologies": [
+        "Axios",
+        "Element Plus",
+        "JWT",
+        "Java",
+        "Lombok",
+        "Maven",
+        "MyBatis",
+        "MyBatis-Plus",
+        "MySQL",
+        "Node.js",
+        "Pinia",
+        "Redis",
+        "Spring Boot",
+        "Spring Security",
+        "TypeScript",
+        "Vite",
+        "Vue",
+        "Vue Router"
+      ],
+      "modules": [
+        "backend",
+        "backend/app",
+        "backend/model",
+        "backend/service",
+        "backend/service/service-behavior",
+        "backend/service/service-business",
+        "backend/service/service-dashboard",
+        "backend/service/service-file",
+        "backend/service/service-formula",
+        "backend/service/service-lowcode",
+        "backend/service/service-survey",
+        "backend/service/service-system",
+        "frontend"
+      ],
+      "evidence": [
+        "Docker Compose 一键部署",
+        "本部署包含 Nginx、Spring Boot 后端、MySQL 8.4、Redis 7.2。Nginx 负责托管前端静态资源，并把 `/api` 反向代理到后端。",
+        "启动",
+        "```bash"
+      ],
+      "dependency_signals": [
+        "@element-plus/icons-vue",
+        "@vitejs/plugin-vue",
+        "app",
+        "axios",
+        "backend",
+        "element-plus",
+        "h2",
+        "jakarta.validation-api",
+        "jjwt-api",
+        "jjwt-impl",
+        "jjwt-jackson",
+        "lombok",
+        "maven-surefire-plugin",
+        "model",
+        "mybatis-plus-spring-boot3-starter",
+        "pinia",
+        "sa-token-spring-boot3-starter",
+        "service",
+        "service-behavior",
+        "service-business",
+        "service-dashboard",
+        "service-file",
+        "service-formula",
+        "service-lowcode",
+        "service-survey",
+        "service-system",
+        "spring-boot-starter-jdbc",
+        "spring-boot-starter-parent",
+        "spring-boot-starter-test",
+        "spring-boot-starter-validation",
+        "spring-boot-starter-web",
+        "spring-security-crypto",
+        "typescript",
+        "vite",
+        "vue",
+        "vue-router",
+        "vue-tsc"
+      ],
+      "files": {
+        "pom": [
+          "backend/pom.xml",
+          "backend/app/pom.xml",
+          "backend/model/pom.xml",
+          "backend/service/pom.xml",
+          "backend/service/service-behavior/pom.xml",
+          "backend/service/service-business/pom.xml",
+          "backend/service/service-dashboard/pom.xml",
+          "backend/service/service-file/pom.xml",
+          "backend/service/service-formula/pom.xml",
+          "backend/service/service-lowcode/pom.xml",
+          "backend/service/service-survey/pom.xml",
+          "backend/service/service-system/pom.xml"
+        ],
+        "package_json": [
+          "frontend/package.json"
+        ],
+        "readme": [
+          "deploy/README.md"
+        ]
+      }
+    },
+    {
+      "name": "ERP",
+      "path": "D:\\Projects\\ERP",
+      "technologies": [
+        "Axios",
+        "Element Plus",
+        "Hutool",
+        "JWT",
+        "Java",
+        "Knife4j",
+        "Lombok",
+        "Maven",
+        "MyBatis",
+        "MyBatis-Plus",
+        "MySQL",
+        "Node.js",
+        "Pinia",
+        "Redis",
+        "Spring Boot",
+        "Vite",
+        "Vue",
+        "Vue Router"
+      ],
+      "modules": [
+        ".",
+        "ERP-Front",
+        "erp-admin",
+        "erp-aftersale",
+        "erp-chat",
+        "erp-common",
+        "erp-customer",
+        "erp-order",
+        "erp-product",
+        "erp-security",
+        "erp-stats",
+        "erp-system"
+      ],
+      "evidence": [
+        "ERP-Front",
+        "This template should help get you started developing with Vue 3 in Vite.",
+        "Recommended IDE Setup",
+        "[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)."
+      ],
+      "dependency_signals": [
+        "@element-plus/icons-vue",
+        "@vitejs/plugin-vue",
+        "@vue/test-utils",
+        "@wangeditor/editor",
+        "@wangeditor/editor-for-vue",
+        "aliyun-sdk-oss",
+        "aspectjweaver",
+        "axios",
+        "dayjs",
+        "easyexcel",
+        "element-plus",
+        "erp-admin",
+        "erp-aftersale",
+        "erp-chat",
+        "erp-common",
+        "erp-customer",
+        "erp-order",
+        "erp-parent",
+        "erp-product",
+        "erp-security",
+        "erp-stats",
+        "erp-system",
+        "fast-check",
+        "happy-dom",
+        "hutool-all",
+        "jjwt-api",
+        "jjwt-impl",
+        "jjwt-jackson",
+        "jsbarcode",
+        "knife4j-openapi3-jakarta-spring-boot-starter",
+        "lombok",
+        "maven-compiler-plugin",
+        "mybatis-plus-spring-boot3-starter",
+        "mysql-connector-j",
+        "pinia",
+        "sass",
+        "spring-boot-dependencies",
+        "spring-boot-starter-aop",
+        "spring-boot-starter-data-redis",
+        "spring-boot-starter-security"
+      ],
+      "files": {
+        "pom": [
+          "pom.xml",
+          "erp-admin/pom.xml",
+          "erp-aftersale/pom.xml",
+          "erp-chat/pom.xml",
+          "erp-common/pom.xml",
+          "erp-customer/pom.xml",
+          "erp-order/pom.xml",
+          "erp-product/pom.xml",
+          "erp-security/pom.xml",
+          "erp-stats/pom.xml",
+          "erp-system/pom.xml"
+        ],
+        "package_json": [
+          "ERP-Front/package.json"
+        ],
+        "readme": [
+          "ERP-Front/README.md"
+        ]
+      }
+    },
+    {
+      "name": "old-people",
+      "path": "D:\\Projects\\old-people",
+      "technologies": [
+        "Axios",
+        "Element Plus",
+        "Java",
+        "Lombok",
+        "Maven",
+        "MySQL",
+        "Node.js",
+        "React",
+        "Spring Boot",
+        "Tailwind CSS",
+        "TypeScript",
+        "Vite",
+        "Vue",
+        "Vue Router"
+      ],
+      "modules": [
+        ".",
+        "admin-front",
+        "projects"
+      ],
+      "evidence": [
+        "admin-front",
+        "This template should help get you started developing with Vue 3 in Vite.",
+        "Recommended IDE Setup",
+        "[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).",
+        "projects",
+        "这是一个基于 [Next.js 16](https://nextjs.org) + [shadcn/ui](https://ui.shadcn.com) 的全栈应用项目，由扣子编程 CLI 创建。",
+        "快速开始",
+        "启动开发服务器",
+        "城乡居民基本养老保险计算器 - 微信小程序版本",
+        "1. 打开微信开发者工具"
+      ],
+      "dependency_signals": [
+        "@aws-sdk/client-s3",
+        "@aws-sdk/lib-storage",
+        "@hookform/resolvers",
+        "@langchain/core",
+        "@radix-ui/react-accordion",
+        "@radix-ui/react-alert-dialog",
+        "@radix-ui/react-aspect-ratio",
+        "@radix-ui/react-avatar",
+        "@radix-ui/react-checkbox",
+        "@radix-ui/react-collapsible",
+        "@radix-ui/react-context-menu",
+        "@radix-ui/react-dialog",
+        "@radix-ui/react-dropdown-menu",
+        "@radix-ui/react-hover-card",
+        "@radix-ui/react-label",
+        "@radix-ui/react-menubar",
+        "@radix-ui/react-navigation-menu",
+        "@radix-ui/react-popover",
+        "@vitejs/plugin-vue",
+        "axios",
+        "element-plus",
+        "lombok",
+        "mysql-connector-j",
+        "old-people",
+        "poi-ooxml",
+        "spring-boot-maven-plugin",
+        "spring-boot-starter-data-jpa",
+        "spring-boot-starter-parent",
+        "spring-boot-starter-security",
+        "spring-boot-starter-validation",
+        "spring-boot-starter-webmvc",
+        "spring-boot-starter-webmvc-test",
+        "vite",
+        "vue",
+        "vue-router"
+      ],
+      "files": {
+        "pom": [
+          "pom.xml"
+        ],
+        "package_json": [
+          "admin-front/package.json",
+          "projects/package.json"
+        ],
+        "readme": [
+          "admin-front/README.md",
+          "projects/README.md",
+          "projects/tmp/miniprogram/README.md",
+          "wechat-front/assets/policies/README.md"
+        ]
+      }
+    }
+  ]
+}

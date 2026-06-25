@@ -22,6 +22,7 @@ class ProgrammerResumeSkillContractTests(unittest.TestCase):
             SKILL_DIR / "scripts" / "extract_template_archives.py",
             SKILL_DIR / "scripts" / "build_template_index.py",
             SKILL_DIR / "scripts" / "extract_resume_text.py",
+            SKILL_DIR / "scripts" / "collect_project_facts.py",
             SKILL_DIR / "scripts" / "generate_resume_docx.py",
             SKILL_DIR / "scripts" / "export_pdf.py",
             SKILL_DIR / "scripts" / "validate_resume_package.py",
@@ -30,6 +31,58 @@ class ProgrammerResumeSkillContractTests(unittest.TestCase):
         missing = [str(path.relative_to(ROOT)) for path in required if not path.exists()]
 
         self.assertEqual(missing, [])
+
+    def test_collect_project_facts_detects_stack_and_readme(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            project_dir = Path(temp_dir) / "sample-saas"
+            frontend_dir = project_dir / "frontend"
+            backend_dir = project_dir / "backend"
+            frontend_dir.mkdir(parents=True)
+            backend_dir.mkdir(parents=True)
+            for index in range(120):
+                (project_dir / f"note-{index:03d}.txt").write_text("not a manifest", encoding="utf-8")
+            (project_dir / "README.md").write_text(
+                "# Sample SaaS\n\nFull-stack project with low-code dashboards.",
+                encoding="utf-8",
+            )
+            (backend_dir / "pom.xml").write_text(
+                """<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.example</groupId>
+  <artifactId>sample-backend</artifactId>
+  <dependencies>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-web</artifactId></dependency>
+    <dependency><groupId>com.mysql</groupId><artifactId>mysql-connector-j</artifactId></dependency>
+  </dependencies>
+</project>""",
+                encoding="utf-8",
+            )
+            (frontend_dir / "package.json").write_text(
+                json.dumps({"dependencies": {"vue": "^3.0.0", "vite": "^5.0.0"}}, indent=2),
+                encoding="utf-8",
+            )
+            result = subprocess.run(
+                [
+                    PYTHON,
+                    str(SKILL_DIR / "scripts" / "collect_project_facts.py"),
+                    "--root",
+                    str(project_dir),
+                    "--out",
+                    str(Path(temp_dir) / "facts.json"),
+                ],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            data = json.loads((Path(temp_dir) / "facts.json").read_text(encoding="utf-8"))
+            project = data["projects"][0]
+            self.assertEqual(project["name"], "sample-saas")
+            self.assertIn("Spring Boot", project["technologies"])
+            self.assertIn("Vue", project["technologies"])
+            self.assertIn("MySQL", project["technologies"])
+            self.assertIn("Full-stack project", " ".join(project["evidence"]))
 
     def test_skill_frontmatter_targets_programmer_resume_requests(self):
         skill_text = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
@@ -151,6 +204,56 @@ class ProgrammerResumeSkillContractTests(unittest.TestCase):
             pdf_path = out_dir / "resume.pdf"
             self.assertTrue(pdf_path.exists())
             self.assertGreater(pdf_path.stat().st_size, 1_000)
+
+    def test_generate_resume_omits_empty_optional_sections(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            facts_path = Path(temp_dir) / "facts.json"
+            facts_path.write_text(
+                json.dumps(
+                    {
+                        "target_role": "全栈开发工程师",
+                        "personal": {"name": "郑发炜"},
+                        "summary": "软件工程专业背景，面向全栈开发。",
+                        "skills": {},
+                        "work_experience": [],
+                        "projects": [
+                            {
+                                "name": "Sample",
+                                "role": "全栈开发",
+                                "technologies": ["Spring Boot", "Vue"],
+                                "bullets": ["实现前后端分离功能。"],
+                            }
+                        ],
+                        "education": [{"major": "软件工程"}],
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+            out_dir = Path(temp_dir) / "resume-package"
+            result = subprocess.run(
+                [
+                    PYTHON,
+                    str(SKILL_DIR / "scripts" / "generate_resume_docx.py"),
+                    "--facts",
+                    str(facts_path),
+                    "--template-index",
+                    str(SKILL_DIR / "assets" / "template-index.json"),
+                    "--out-dir",
+                    str(out_dir),
+                    "--language",
+                    "zh-CN",
+                ],
+                cwd=ROOT,
+                text=True,
+                capture_output=True,
+            )
+
+            self.assertEqual(result.returncode, 0, result.stderr)
+            text = (out_dir / "resume.txt").read_text(encoding="utf-8")
+            self.assertNotIn("工作经历", text)
+            self.assertIn("教育背景\n软件工程", text)
 
 
 if __name__ == "__main__":

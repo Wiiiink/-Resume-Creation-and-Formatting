@@ -6,11 +6,12 @@
 
 1. 如果 `template/` 仍有 `.zip` 或 `.rar`，运行 `scripts/extract_template_archives.py --template-root template --delete-archives`。
 2. 运行 `scripts/build_template_index.py` 建立或刷新 `assets/template-index.json`。
-3. 将用户信息或旧简历内容整理成 JSON 事实。
-4. 用 `scripts/generate_resume_docx.py` 生成 DOCX。
-5. 用 `scripts/export_pdf.py` 导出 PDF。
-6. 用 `scripts/validate_resume_package.py` 验证输出。
-7. 返回输出路径和所选模板来源。
+3. 如果用户提供本地项目目录，运行 `scripts/collect_project_facts.py --root <project-dir> --out <output>/project-facts.json`。
+4. 将用户信息、旧简历内容和项目事实整理成 JSON 事实；缺少的联系方式、学校、日期、指标必须留空或省略。
+5. 用 `scripts/generate_resume_docx.py` 生成 DOCX。
+6. 用 `scripts/export_pdf.py` 导出 PDF。
+7. 用 `scripts/validate_resume_package.py` 验证输出。
+8. 返回输出路径和所选模板来源。
 
 ## DOCX 规则
 

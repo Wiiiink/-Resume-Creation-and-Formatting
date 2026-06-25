@@ -65,6 +65,27 @@ def add_line(document: Document, text: str, bold: bool = False) -> None:
     run.bold = bold
 
 
+def compact_join(parts: list[str], separator: str = "    ") -> str:
+    return separator.join(part for part in parts if part)
+
+
+def date_range(item: dict) -> str:
+    start = item.get("start", "")
+    end = item.get("end", "")
+    if start and end:
+        return f"{start}-{end}"
+    return start or end
+
+
+def meaningful_items(items: list[dict]) -> list[dict]:
+    return [
+        item
+        for item in items
+        if any(value for value in item.values() if isinstance(value, str))
+        or any(item.get(key) for key in ["bullets", "technologies"])
+    ]
+
+
 def render_resume(facts: dict, selected_template: dict, out_dir: Path) -> Path:
     document = Document()
     configure_document(document)
@@ -96,10 +117,10 @@ def render_resume(facts: dict, selected_template: dict, out_dir: Path) -> Path:
         paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
         paragraph.add_run(contact_line)
 
-    add_heading(document, SECTION_ORDER[0])
-    add_bullet(document, facts.get("summary", ""))
+    if facts.get("summary"):
+        add_heading(document, SECTION_ORDER[0])
+        add_bullet(document, facts.get("summary", ""))
 
-    add_heading(document, SECTION_ORDER[1])
     skills = facts.get("skills", {})
     labels = {
         "languages": "编程语言",
@@ -108,29 +129,37 @@ def render_resume(facts: dict, selected_template: dict, out_dir: Path) -> Path:
         "databases": "数据库",
         "tools": "工具平台",
     }
-    for key, label in labels.items():
-        values = skills.get(key)
-        if values:
-            add_bullet(document, f"{label}：{'、'.join(values)}")
+    if any(skills.get(key) for key in labels):
+        add_heading(document, SECTION_ORDER[1])
+        for key, label in labels.items():
+            values = skills.get(key)
+            if values:
+                add_bullet(document, f"{label}：{'、'.join(values)}")
 
-    add_heading(document, SECTION_ORDER[2])
-    for item in facts.get("work_experience", []):
-        add_line(document, f"{item.get('start', '')}-{item.get('end', '')}    {item.get('company', '')}    {item.get('role', '')}", bold=True)
+    work_items = meaningful_items(facts.get("work_experience", []))
+    if work_items:
+        add_heading(document, SECTION_ORDER[2])
+    for item in work_items:
+        add_line(document, compact_join([date_range(item), item.get("company", ""), item.get("role", "")]), bold=True)
         for bullet in item.get("bullets", []):
             add_bullet(document, bullet)
 
-    add_heading(document, SECTION_ORDER[3])
-    for item in facts.get("projects", []):
+    project_items = meaningful_items(facts.get("projects", []))
+    if project_items:
+        add_heading(document, SECTION_ORDER[3])
+    for item in project_items:
         stack = "、".join(item.get("technologies", []))
-        add_line(document, f"{item.get('period', '')}    {item.get('name', '')}    {item.get('role', '')}", bold=True)
+        add_line(document, compact_join([item.get("period", ""), item.get("name", ""), item.get("role", "")]), bold=True)
         if stack:
             add_bullet(document, f"技术栈：{stack}")
         for bullet in item.get("bullets", []):
             add_bullet(document, bullet)
 
-    add_heading(document, SECTION_ORDER[4])
-    for item in facts.get("education", []):
-        add_line(document, f"{item.get('start', '')}-{item.get('end', '')}    {item.get('school', '')}    {item.get('major', '')}    {item.get('degree', '')}", bold=True)
+    education_items = meaningful_items(facts.get("education", []))
+    if education_items:
+        add_heading(document, SECTION_ORDER[4])
+    for item in education_items:
+        add_line(document, compact_join([date_range(item), item.get("school", ""), item.get("major", ""), item.get("degree", "")]), bold=True)
 
     certificates = facts.get("certificates", [])
     if certificates:
@@ -155,26 +184,34 @@ def render_resume(facts: dict, selected_template: dict, out_dir: Path) -> Path:
 
 def render_plain_text(facts: dict, selected_template: dict) -> str:
     personal = facts.get("personal", {})
+    contact_line = " | ".join(filter(None, [personal.get("phone"), personal.get("email"), personal.get("city"), personal.get("github")]))
     lines = [
         personal.get("name", ""),
         f"求职意向：{facts.get('target_role', '')}",
-        " | ".join(filter(None, [personal.get("phone"), personal.get("email"), personal.get("city"), personal.get("github")])),
-        "",
-        f"模板来源：{selected_template.get('path', 'template corpus')}",
-        "",
-        "个人优势",
-        facts.get("summary", ""),
     ]
+    if contact_line:
+        lines.append(contact_line)
+    lines.extend(["", f"模板来源：{selected_template.get('path', 'template corpus')}"])
+    if facts.get("summary"):
+        lines.extend(["", "个人优势", facts.get("summary", "")])
     skills = facts.get("skills", {})
-    if skills:
+    if any(skills.values()):
         lines.extend(["", "专业技能"])
         for values in skills.values():
             if values:
                 lines.append("、".join(values))
     for section, key in [("工作经历", "work_experience"), ("项目经历", "projects"), ("教育背景", "education")]:
+        items = meaningful_items(facts.get(key, []))
+        if not items:
+            continue
         lines.extend(["", section])
-        for item in facts.get(key, []):
-            lines.append(" ".join(str(value) for value in item.values() if isinstance(value, str)))
+        for item in items:
+            if key == "work_experience":
+                lines.append(compact_join([date_range(item), item.get("company", ""), item.get("role", "")], " "))
+            elif key == "projects":
+                lines.append(compact_join([item.get("period", ""), item.get("name", ""), item.get("role", "")], " "))
+            elif key == "education":
+                lines.append(compact_join([date_range(item), item.get("school", ""), item.get("major", ""), item.get("degree", "")], " "))
             for bullet in item.get("bullets", []):
                 lines.append(f"- {bullet}")
     if facts.get("certificates"):
